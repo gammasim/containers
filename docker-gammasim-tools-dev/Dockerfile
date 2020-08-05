@@ -1,0 +1,45 @@
+From sl:7
+
+# Directory in which software is installed
+WORKDIR workdir
+
+# basic packages
+RUN yum -y install \
+  bash \
+  csh \
+  vim \
+  wget
+
+# developer tools (g++/gcc/gfortran/...)
+RUN yum group install -y "Development Tools" && \
+    yum clean all
+
+# gsl
+RUN wget "ftp://ftp.gnu.org/gnu/gsl/gsl-2.6.tar.gz" && \
+    tar -xvzf gsl-2.6.tar.gz && cd gsl-2.6 && \
+    ./configure && make && make install && \
+    cd .. && \
+    rm -f gsl-2.6.tar.gz && \
+    rm -rf gsl-2.6
+# add gsl to LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH "/usr/local/lib:${LD_LIBRARY_PATH}"
+
+# corsika and sim_telarray
+COPY corsika7.7_simtelarray.tar.gz .
+RUN tar -xvzf corsika7.7_simtelarray.tar.gz && \
+    ./build_all prod5 qgs2 gsl && \
+    rm -f *.tar.gz
+
+# install miniconda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b && \
+    rm -f Miniconda3-latest-Linux-x86_64.sh
+ENV PATH /root/miniconda3/bin:$PATH
+
+# install environment for gammasim-tools
+RUN  wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
+    conda env create -f environment.yml && \
+    conda clean -p -y
+
+RUN conda init bash && \
+    source /root/.bashrc
