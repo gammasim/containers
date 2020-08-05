@@ -24,12 +24,6 @@ RUN wget "ftp://ftp.gnu.org/gnu/gsl/gsl-2.6.tar.gz" && \
 # add gsl to LD_LIBRARY_PATH
 ENV LD_LIBRARY_PATH "/usr/local/lib:${LD_LIBRARY_PATH}"
 
-# corsika and sim_telarray
-COPY corsika7.7_simtelarray.tar.gz .
-RUN tar -xvzf corsika7.7_simtelarray.tar.gz && \
-    ./build_all prod5 qgs2 gsl && \
-    rm -f *.tar.gz
-
 # install miniconda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b && \
@@ -37,6 +31,13 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -b && \
 ENV PATH /root/miniconda3/bin:$PATH
 
 # install environment for gammasim-tools
+
+# corsika and sim_telarray
+COPY corsika7.7_simtelarray.tar.gz .
+RUN tar -xvzf corsika7.7_simtelarray.tar.gz && \
+    ./build_all prod5 qgs2 gsl && \
+    rm -f *.tar.gz
+
 RUN  wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
     conda env create -f environment.yml && \
     conda clean -p -y
