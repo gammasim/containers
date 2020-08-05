@@ -17,6 +17,8 @@ Download this one from the MPIK website.
 $ docker build -t gammasim-tools-dev .
 ```
 
+Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff).
+
 ## Running
 
 To run the container in bash 
