@@ -8,7 +8,10 @@ RUN yum -y install \
   bash \
   csh \
   vim \
-  wget
+  wget \
+  texlive \
+  texlive-latex \
+  dvipng
 
 # developer tools (g++/gcc/gfortran/...)
 RUN yum group install -y "Development Tools" && \
