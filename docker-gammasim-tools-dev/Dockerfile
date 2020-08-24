@@ -9,6 +9,7 @@ RUN yum -y install \
   csh \
   vim \
   wget \
+  krb5-workstation \
   texlive \
   texlive-latex \
   dvipng
@@ -47,6 +48,13 @@ RUN cd sim_telarray && \
 RUN  wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
     conda env create -f environment.yml && \
     conda clean -p -y
+
+# Make sure krb token is delegated
+RUN mkdir ~/.ssh && \
+    echo "GSSAPIDelegateCredentials yes" > ~/.ssh/config && \
+    ssh-keyscan -H warp1.zeuthen.desy.de >> ~/.ssh/known_hosts
+    
+ENV KRB5CCNAME="FILE:/tmp/token.krb"
 
 RUN conda init bash && \
     source /root/.bashrc
