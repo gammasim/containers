@@ -22,7 +22,7 @@ git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/sim
 git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/simulation-model/verification/verification-process/mst-flashcam.git
 git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/simulation-model/verification/verification-process/lst.git
 ```
-3. instrument files (not yet on gitlab)
+3. instrument files (not yet on gitlab?)
 ```
 from svn: dataFromInstrumentTeams
 ```

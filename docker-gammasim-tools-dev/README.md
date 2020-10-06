@@ -41,4 +41,4 @@ $ conda activate gammasim-tools-dev
 $ source set_simtools.sh
 ```
 
-Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md) there)
+Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md))
