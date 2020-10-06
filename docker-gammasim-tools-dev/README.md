@@ -30,7 +30,7 @@ Building will take a while and the image is large (3.9 GB; mostly due to the >2 
 To run the container in bash 
 
 ```
-$ docker run --rm -it -v "$(pwd)/gammasim-tools:/gammasim-tools" -v "/tmp/token.krb:/tmp/token.krb" gammasim-tools-dev bash
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" -v "/tmp/token.krb:/tmp/token.krb" gammasim-tools-dev bash
 ```
 
 Notice that we assume a kerberos token file "token.krb" is present in /tmp. This allows smooth connection to the DB. The docker does not fail if the token does not exist. (This is a temporary solution.)
@@ -38,13 +38,7 @@ Notice that we assume a kerberos token file "token.krb" is present in /tmp. This
 In the container, activate the environment:
 ```
 $ conda activate gammasim-tools-dev
+$ source set_simtools.sh
 ```
 
-Expect gammasim-tools package in directory /gammasim-tools/
-
-Get package with
-
-```
-git clone https://github.com/gammasim/gammasim-tools.git gammasim-tools
-```
-
+Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md) there)
