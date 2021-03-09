@@ -56,5 +56,7 @@ RUN mkdir ~/.ssh && \
     
 ENV KRB5CCNAME="FILE:/tmp/token.krb"
 
+ENV SIMTELPATH="/workdir/sim_telarray/"
+
 RUN conda init bash && \
     source /root/.bashrc
