@@ -25,6 +25,10 @@ $ docker build -t gammasim-tools-dev .
 
 Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff).
 
+## gammasim-tools 
+
+Clone the gammasim-tools code into the './external/' directory (see [README.md](external/README.md).
+
 ## Running
 
 To run the container in bash 
@@ -37,6 +41,7 @@ Notice that we assume a kerberos token file "token.krb" is present in /tmp. This
 
 In the container, activate the environment for gammasim-tools:
 ```
+$ cd /workdir/external/gammasim-tools/
 $ conda activate gammasim-tools-dev
 $ source set_simtools.sh
 ```
