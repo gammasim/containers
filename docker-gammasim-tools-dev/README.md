@@ -47,3 +47,7 @@ $ source set_simtools.sh
 ```
 
 Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md))
+
+## Docker Hub
+
+An example image is available from [Docker hub](https://hub.docker.com/repository/docker/gernotmaier/gammasim-tools-dev).
