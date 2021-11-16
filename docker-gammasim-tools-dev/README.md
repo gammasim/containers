@@ -1,17 +1,21 @@
-# Docker container for gamma-sim-tools development
+# Docker container for gammasim-tools development
 
 ## Introduction
 
-Container with:
+Provide a container for testing and development of gammasim-tools. This container is not optimised for size, but for completeness of development tools.
 
-- corsika and sim_telarray installed
-- miniconda installed
-- gamma-sim-tools conda packages (from environment.yml) installed
+Container contains installation of:
+
+- corsika and sim\_telarray
+- miniconda
+- packages required by gammasim-tools (from environment.yml)
+
+The container does not include gammasim-tools, which should be cloned in the ./external directory (see below).
 
 ## Building
 
-Building expects that a tar ball of corsika/sim_telarray (corsika7.7_simtelarray.tar.gz) is available in the building directory.
-Download this one from the MPIK website (password applies) with
+Building expects that a tar ball of corsika/sim\_telarray (corsika7.7\_simtelarray.tar.gz) is available in the building directory.
+Download the tar package from the MPIK website (password applies) with
 
 ```
 $ ./download_simulationsoftware.sh
@@ -27,7 +31,13 @@ Building will take a while and the image is large (3.9 GB; mostly due to the >2 
 
 ## gammasim-tools 
 
-Clone the gammasim-tools code into the './external/' directory (see [README.md](external/README.md).
+Clone the gammasim-tools code into the './external/' directory (see also [README.md](external/README.md):
+
+```
+cd ./external
+git clone https://github.com/gammasim/gammasim-tools.git
+cd ..
+```
 
 ## Running
 

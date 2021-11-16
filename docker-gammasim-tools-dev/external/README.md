@@ -7,6 +7,10 @@ gammasim-tools
 git clone https://github.com/gammasim/gammasim-tools.git
 ```
 
+## Additional Information
+
+(information below might be outdated)
+
 For running without the model DB:
 
 1. model configuration
