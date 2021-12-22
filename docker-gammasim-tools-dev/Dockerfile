@@ -32,10 +32,11 @@ ENV SIMTELPATH="/workdir/sim_telarray/"
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p ${WORKDIR}/conda && \
     rm ~/miniconda.sh && \
-    ${WORKDIR}/conda/bin/conda clean -tipsy
+    ${WORKDIR}/conda/bin/conda clean -tipsy && \
+    ${WORKDIR}/conda/bin/conda install -c conda-forge mamba
 ENV PATH /${WORKDIR}/conda/bin:$PATH
-RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
-    conda env create -f environment.yml && \
+RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/test-actions/environment.yml && \
+    mamba env create -f environment.yml && \
     conda clean -tipsy
 
 # tex installation
