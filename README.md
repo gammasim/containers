@@ -10,6 +10,14 @@ The following Docker files are available:
 
 - Running gammasim applications (./docker-gammasim-application)
 
+## Installation
+
+## Running a gammasim-tools Container
+
+```
+docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash
+```
+
 # Building corsika/sim_telarray
 
 ```
