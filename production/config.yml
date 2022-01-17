@@ -1,0 +1,21 @@
+# configuration file for simtools
+
+useMongoDB: true 
+mongoDBConfigFile: ./dbDetails_template.yml
+
+modelFilesLocations: [
+  /workdir/external/simulation-model-description/configReports/,
+  /workdir/external/simulation-model-description/datFiles/,
+  /workdir/external/verification-process/dataFromInstrumentTeams/
+]
+
+outputLocation: /workdir/external/output/
+
+dataLocation: './data/'
+
+simtelPath: '$SIMTELPATH'
+
+# Not used yet
+submissionCommand: 'qsub '
+
+extraCommands: []
