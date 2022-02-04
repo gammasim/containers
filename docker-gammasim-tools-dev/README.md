@@ -14,7 +14,7 @@ The container does not include gammasim-tools, which should be cloned in the ./e
 
 ## Building
 
-Building expects that a tar ball of corsika/sim\_telarray (corsika7.7\_simtelarray.tar.gz) is available in the building directory.
+Building expects that a tar ball of corsika/sim\_telarray (named corsika7.7\_simtelarray.tar.gz) is available in the building directory.
 Download the tar package from the MPIK website (password applies) with
 
 ```
@@ -27,11 +27,11 @@ Build the container with:
 $ docker build -t gammasim-tools-dev .
 ```
 
-Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff).
+Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff and the large latex installation).
 
 ## gammasim-tools 
 
-Clone the gammasim-tools code into the './external/' directory (see also [README.md](external/README.md):
+Clone the gammasim-tools code and additional data into the './external/' directory (see also [README.md](external/README.md):
 
 ```
 cd ./external

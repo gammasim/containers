@@ -1,12 +1,12 @@
 # configuration file for simtools
 
-useMongoDB: false
+useMongoDB: true
 mongoDBConfigFile: ./dbDetails.yml
 
 modelFilesLocations: [
   /workdir/external/simulation-model-description/configReports/,
   /workdir/external/simulation-model-description/datFiles/,
-  /workdir/external/verification-process/dataFromInstrumentTeams/
+  /workdir/external/external/data-from-instrument-teams/
 ]
 
 outputLocation: /workdir/external/output/
