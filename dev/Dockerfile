@@ -35,9 +35,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linu
     ${WORKDIR}/conda/bin/conda clean -tipsy && \
     ${WORKDIR}/conda/bin/conda install -c conda-forge mamba
 ENV PATH /${WORKDIR}/conda/bin:$PATH
-RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/test-actions/environment.yml && \
-    mamba env create -f environment.yml && \
-    conda clean -tipsy
 
 # tex installation
 RUN apt-get update && apt-get install -y \
@@ -47,6 +44,10 @@ RUN apt-get update && apt-get install -y \
     texlive-fonts-recommended && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
+    mamba env update --file  environment.yml && \
+    conda clean -tipsy
+
 # Make sure krb token is delegated
 RUN mkdir ~/.ssh && \
     echo "GSSAPIDelegateCredentials yes" > ~/.ssh/config && \
@@ -55,5 +56,9 @@ RUN mkdir ~/.ssh && \
 ENV KRB5CCNAME="FILE:/tmp/token.krb"
 SHELL ["/bin/bash", "-c"]
 
-RUN conda init bash && \
-    source /root/.bashrc
+RUN source /root/.bashrc && \
+    conda init bash
+RUN echo "conda activate gammasim-tools-dev" >> ~/.bashrc
+ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
+
+WORKDIR /workdir/external

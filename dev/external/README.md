@@ -7,15 +7,20 @@ gammasim-tools
 git clone https://github.com/gammasim/gammasim-tools.git
 ```
 
-## Additional Information
+## Additional Data
 
 (information below might be outdated)
 
-For running without the model DB:
+As a temporary solution, some additional configuration and data is required from the CTA gitlab.
+Use the following script to download them all:
+```
+./clone_gitlab_verification_data.sh
+```
 
+The script will clone the following repositories:
 1. model configuration
 ```
-git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/simulation-model/simulation-model-description.git
+git clone git@gitlab.cta-observatory.org:cta-consortium/aswg/simulations/simulation-model/simulation-model-description.git
 ``` 
 2. verification process files
 ```
@@ -26,7 +31,7 @@ git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/sim
 git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/simulation-model/verification/verification-process/mst-flashcam.git
 git clone https://gitlab.cta-observatory.org/cta-consortium/aswg/simulations/simulation-model/verification/verification-process/lst.git
 ```
-3. instrument files (not yet on gitlab?)
+3. instrument files
 ```
-from svn: dataFromInstrumentTeams
+git clone https://gitlab.cta-observatory.org/cta-science/simulations/simulation-model/verification/verification-process/
 ```
