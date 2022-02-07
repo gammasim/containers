@@ -61,4 +61,4 @@ RUN source /root/.bashrc && \
 RUN echo "conda activate gammasim-tools-dev" >> ~/.bashrc
 ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
 
-COPY config.yml /workdir/gammasim-tools
+WORKDIR /workdir/external
