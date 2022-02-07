@@ -45,14 +45,6 @@ RUN wget --quiet https://github.com/gammasim/gammasim-tools/archive/refs/heads/m
     mamba env update -n base --file environment.yml && \
     conda clean -tipsy
 
-# tex installation
-RUN apt-get update && apt-get install -y \
-    cm-super \
-    dvipng \
-    texlive-latex-extra \
-    texlive-fonts-recommended && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Make sure krb token is delegated
 RUN mkdir ~/.ssh && \
     echo "GSSAPIDelegateCredentials yes" > ~/.ssh/config && \
@@ -61,7 +53,9 @@ RUN mkdir ~/.ssh && \
 ENV KRB5CCNAME="FILE:/tmp/token.krb"
 SHELL ["/bin/bash", "-c"]
 
-RUN conda init bash && \
-    source /root/.bashrc
+RUN source /root/.bashrc && \
+    conda init bash
+RUN echo "conda activate gammasim-tools-dev" >> ~/.bashrc
+ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
 
 COPY config.yml /workdir/gammasim-tools
