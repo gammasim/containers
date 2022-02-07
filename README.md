@@ -12,6 +12,9 @@ The following Docker files are available:
 
 ## Installation
 
+see [./dev](./dev) or [./prod](./prod) directories for docker images used for 
+gammasim-tools development or production
+
 ## Running a gammasim-tools Container
 
 ```

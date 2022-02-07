@@ -17,7 +17,7 @@ Building expects that a tar ball of corsika/sim\_telarray (corsika7.7\_simtelarr
 Download the tar package from the MPIK website (password applies) with
 
 ```
-$ ./download_simulationsoftware.sh
+$ ../tools/download_simulationsoftware.sh
 ```
 
 Build the container with:
