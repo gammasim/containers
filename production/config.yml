@@ -1,6 +1,7 @@
+---
 # configuration file for simtools
 
-useMongoDB: true 
+useMongoDB: true
 mongoDBConfigFile: ./dbDetails_template.yml
 
 modelFilesLocations: [
