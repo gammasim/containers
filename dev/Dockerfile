@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     krb5-user \
     libpam-krb5 \
     make \
+    unzip \
     vim \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -35,14 +36,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linu
     ${WORKDIR}/conda/bin/conda clean -tipsy && \
     ${WORKDIR}/conda/bin/conda install -c conda-forge mamba
 ENV PATH /${WORKDIR}/conda/bin:$PATH
-
-# tex installation
-RUN apt-get update && apt-get install -y \
-    cm-super \
-    dvipng \
-    texlive-latex-extra \
-    texlive-fonts-recommended && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
     mamba env update --file  environment.yml && \
