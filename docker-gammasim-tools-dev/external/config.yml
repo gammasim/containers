@@ -6,12 +6,12 @@ mongoDBConfigFile: ./dbDetails.yml
 modelFilesLocations: [
   /workdir/external/simulation-model-description/configReports/,
   /workdir/external/simulation-model-description/datFiles/,
-  /workdir/external/external/data-from-instrument-teams/
+  /workdir/external/data-from-instrument-teams/
 ]
 
 outputLocation: /workdir/external/output/
 
-testDataLocation: './data/'
+dataLocation: '/workdir/external/gammasim-tools/data/'
 
 simtelPath: /workdir/sim_telarray/
 
