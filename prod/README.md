@@ -9,7 +9,7 @@ Container contains installation of:
 - corsika and sim\_telarray
 - miniconda
 - packages required by gammasim-tools (from environment.yml)
-- gammasim-tools
+- gammasim-tools (master)
 
 ## Building
 
