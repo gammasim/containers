@@ -49,12 +49,6 @@ RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/enviro
     mamba env update --file  environment.yml && \
     conda clean -tipsy
 
-# Make sure krb token is delegated
-RUN mkdir ~/.ssh && \
-    echo "GSSAPIDelegateCredentials yes" > ~/.ssh/config && \
-    ssh-keyscan -H warp1.zeuthen.desy.de >> ~/.ssh/known_hosts
-
-ENV KRB5CCNAME="FILE:/tmp/token.krb"
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \

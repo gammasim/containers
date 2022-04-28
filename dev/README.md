@@ -60,10 +60,8 @@ Building will take a while and the image is large (3.9 GB; mostly due to the >2 
 To run the container in bash 
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" -v "/tmp/token.krb:/tmp/token.krb" gammasim-tools-dev bash
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash
 ```
-
-Notice that we assume a kerberos token file "token.krb" is present in /tmp. This allows smooth connection to the DB. The docker does not fail if the token does not exist (this is a temporary solution.)
 
 Any output will be written to the `$(pwd)/external` directory.
 
