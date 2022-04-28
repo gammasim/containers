@@ -3,7 +3,7 @@
 # download CORSIKA / sim_telarray package from 
 # MPIK page
 # 
-# requies CTA user name / password
+# requires CTA user name / password
 #
 
 VERSION="7.7"

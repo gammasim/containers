@@ -1,20 +1,22 @@
+---
 # configuration file for simtools
 
-useMongoDB: true
+useMongoDB: True
 mongoDBConfigFile: ./dbDetails.yml
 
 modelFilesLocations: [
   /workdir/external/simulation-model-description/configReports/,
   /workdir/external/simulation-model-description/datFiles/,
-  /workdir/external/data-from-instrument-teams/,
-  /workdir/external/gammasim-tools/data/test-data/
+  /workdir/external/verification-process/dataFromInstrumentTeams/
 ]
 
 outputLocation: /workdir/external/output/
 
-dataLocation: '/workdir/external/gammasim-tools/data/'
+dataLocation: './data/'
 
-simtelPath: /workdir/sim_telarray/
+simtelPath: '$SIMTELPATH'
 
 # Not used yet
 submissionCommand: 'qsub '
+
+extraCommands: []
