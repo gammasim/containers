@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     krb5-user \
     libpam-krb5 \
     make \
+    unzip \
     vim \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
