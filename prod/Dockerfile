@@ -39,23 +39,16 @@ ENV PATH /${WORKDIR}/conda/bin:$PATH
 
 RUN wget --quiet https://github.com/gammasim/gammasim-tools/archive/refs/heads/master.zip && \
     unzip master.zip && mv gammasim-tools-master gammasim-tools && \
-    cd gammasim-tools && \
+    rm -f master.zip && cd gammasim-tools && \
     mv environment.yml environment.yml.tmp && \
     grep -v "name: gammasim-tools-dev" environment.yml.tmp > environment.yml && \
     mamba env update -n base --file environment.yml && \
     conda clean -tipsy
 
-# Make sure krb token is delegated
-RUN mkdir ~/.ssh && \
-    echo "GSSAPIDelegateCredentials yes" > ~/.ssh/config && \
-    ssh-keyscan -H warp1.zeuthen.desy.de >> ~/.ssh/known_hosts
-
-ENV KRB5CCNAME="FILE:/tmp/token.krb"
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \
     conda init bash
-RUN echo "conda activate gammasim-tools-dev" >> ~/.bashrc
 ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
 
 COPY config.yml /workdir/gammasim-tools

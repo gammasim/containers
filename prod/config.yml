@@ -1,8 +1,8 @@
 ---
 # configuration file for simtools
 
-useMongoDB: true
-mongoDBConfigFile: ./dbDetails_template.yml
+useMongoDB: True
+mongoDBConfigFile: ./dbDetails.yml
 
 modelFilesLocations: [
   /workdir/external/simulation-model-description/configReports/,
