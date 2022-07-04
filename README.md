@@ -14,6 +14,6 @@ The following Docker files are available:
 
 see [./dev](./dev) or [./prod](./prod) directories for docker images used for 
 gammasim-tools development or production. Main difference is:
-- [prod](prod/README.md): includes gammasim-tools and corsika/sim_telarray installation (**expermental - not working yet**)
+- [prod](prod/README.md): includes gammasim-tools and corsika/sim_telarray installation (**experimental - not working yet**)
 - [dev](dev/README.md): includes corsika/sim_telarray, a full latex installation and expects the gammasim-tools installation in the `./external` directory
 
