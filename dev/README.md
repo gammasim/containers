@@ -38,6 +38,14 @@ cd external
 ./clone_gitlab_verification_data.sh
 ```
 
+## Running a container using the prepared Docker image
+
+To download and run a prepared container in bash
+
+```
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/gammasim-tools-dev:v0.2.0-dev1 bash
+```
+
 ## Building the Container
 
 Building expects that a tar ball of corsika/sim\_telarray (named corsika7.7\_simtelarray.tar.gz) is available in the building directory.
