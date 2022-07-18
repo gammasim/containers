@@ -43,12 +43,12 @@ RUN wget --quiet https://github.com/gammasim/gammasim-tools/archive/refs/heads/m
     mv environment.yml environment.yml.tmp && \
     grep -v "name: gammasim-tools-dev" environment.yml.tmp > environment.yml && \
     mamba env update -n base --file environment.yml && \
-    conda clean -tipsy
+    conda clean -tip
 
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \
     conda init bash
-ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
+RUN cd /workdir/gammasim-tools && pip install -e .
 
 COPY config.yml /workdir/gammasim-tools
