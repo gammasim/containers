@@ -12,6 +12,15 @@ Container contains installation of:
 
 The container does not include gammasim-tools, which should be cloned in the ./external directory (see below).
 
+## Running a container using the prepared Docker image
+
+- To download and run a prepared container in bash:
+
+```
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/gammasim-tools-dev:v0.2.0-dev1 bash
+```
+- If you don't have a prepared container, follow the instructions below.
+
 ## First step: Preparation
 - Create a folder called gammasim:
 ```
@@ -36,7 +45,13 @@ cd gammasim-tools
 cd ../../
 ls
 ```
+
+## Building the Container
+
+Building expects that a tar ball of corsika/sim\_telarray (named corsika7.7\_simtelarray.tar.gz) is available in the building directory.
+Download the tar package from the MPIK website (password applies) with
 - Now download (or use another version) of the corsika_simtelarray installation to this folder. To download from the website use:
+
 ```
 ../tools/download_simulationsoftware.sh
 ```
