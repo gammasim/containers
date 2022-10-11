@@ -17,7 +17,7 @@ There are two options on how to use this container:
 1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev).
 2. Build a new container from the available Dockerfile.
 
-## Running a container using the prepared Docker image available from repository
+## Run a container using the prepared Docker image available from repository
 
 Packages are available from the [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev).
 
@@ -32,16 +32,13 @@ Description of build a new container using the [Dockerfile](Dockerfile) availabl
 
 **Preparation:**
 
-1. Create a folder called gammasim:
+Create a folder called gammasim and clone the container project:
 ```
 mkdir gammasim
-```
-- Go to the folder and clone the container project
-```
 cd gammasim
 git clone git@github.com:gammasim/containers.git
 ```
-- Go to the following path and clone gammasim-tools there:
+- Clone gammasim-tools into the external directory (this is where the source files of gammasim-tools will be available for development):
 ```
 cd containers/dev/external
 git clone git@github.com:gammasim/gammasim-tools.git
@@ -80,10 +77,7 @@ cd gammasim-tools
 pytest --no-cov
 ```
 - If everything works out, all the tests will pass.
-- To leave the docker just type:
-```
-exit
-```
+- To leave the docker just type: `exit`
 
 __Apple silicon users, notice you should add --platform=linux/amd64 to the run command above.__
 
