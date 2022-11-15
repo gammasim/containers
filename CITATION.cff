@@ -21,5 +21,5 @@ authors:
     orcid: 'https://orcid.org/0000-0002-5085-8828'
     affiliation: DESY
 repository-code: 'https://github.com/gammasim/containers'
-# doi: 10.5281/zenodo.6346697
+doi: 10.5281/zenodo.7323554
 license: BSD-3-Clause
