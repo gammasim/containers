@@ -1,19 +1,12 @@
-# Introduction
+# Containers for gammasim-tools
 
-Docker files for [gammasim-tools](https://github.com/gammasim/gammasim-tools) applications.
+Docker files for [gammasim-tools](https://github.com/gammasim/gammasim-tools) development and applications.
 
-# Docker Containers
+[Docker](https://www.docker.com/community-edition#/download) or any compatible software are required to run these images.
 
-You must [have Docker installed](https://www.docker.com/community-edition#/download) to run these images.
+Types of containers available:
+- gammasim-tools development: [dev](./dev) provides a container with CORSIKA, sim\_telarray, and gammasim-tools conda environment installed
+- gammasim-tools users: [prod](./prod) provides a container with all software installed (CORSIKA, sim\_telarray, gammasim-tools conda environment, gammasim_tools)
+- sim\_telarray: [simtelarray](./simtelarray) provides a container with the CORSIKA and sim\_telarray installed.
 
-The following Docker files are available:
-
-- Running gammasim applications (./docker-gammasim-application)
-
-## Installation
-
-see [./dev](./dev) or [./prod](./prod) directories for docker images used for 
-gammasim-tools development or production. Main difference is:
-- [prod](prod/README.md): includes gammasim-tools and corsika/sim_telarray installation (**experimental - not working yet**)
-- [dev](dev/README.md): includes corsika/sim_telarray, a full latex installation and expects the gammasim-tools installation in the `./external` directory
-
+The CORSIKA / sim\_telarray packages can be downloaded from MPIK (authentication required).

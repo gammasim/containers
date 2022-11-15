@@ -1,4 +1,4 @@
-# Docker container for gammasim-tools development
+# Container for gammasim-tools development
 
 ## Introduction
 
@@ -14,8 +14,8 @@ The container does not include gammasim-tools, which should be cloned in the ./e
 
 There are two options on how to use this container:
 
-1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev).
-2. Build a new container from the available Dockerfile.
+1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev) (access restricted)
+2. Build a new container from the available Dockerfile (requires access to sim\_telarray package)
 
 ## Run a container using the prepared Docker image available from repository
 
@@ -24,8 +24,11 @@ Packages are available from the [gammasim-tools container repository](https://gi
 To download and run a prepared container in bash:
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/gammasim-tools-dev:v0.3.0-dev1 bash
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/gammasim-tools-dev:v0.3.0-dev1 bash -c "$(cat ./entrypoint.sh) && bash"
 ```
+
+This additionally executes the `entrypoint.sh` script (e.g., for pip install or set the database environment).
+
 ## Build a new container
 
 Description of build a new container using the [Dockerfile](Dockerfile) available in this directory.
@@ -44,9 +47,7 @@ cd containers/dev/external
 git clone git@github.com:gammasim/gammasim-tools.git
 cd gammasim-tools
 ```
-- Set up the db authentication file with the appropriated information in the gammasim-tools folder. The file should be named *dbDetails.yml* and should contain details on the connection to the DB. A template is available in the *dbDetails_template.yml* file. Ask for details of the connection to the responsible person.
-
-- Go to the following path (gammasim/containers/dev/) and assure that there is a *Dockerfile* there:
+Go to the following path (gammasim/containers/dev/) and assure that there is a *Dockerfile* there:
 ```
 cd ../../
 ls
