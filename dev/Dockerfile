@@ -1,5 +1,5 @@
 From ubuntu:22.10 as build_image
-WORKDIR workdir
+WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -29,10 +29,20 @@ RUN cd sim_telarray && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
 
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /workdir/conda && \
+    rm ~/miniconda.sh && \
+    /workdir/conda/bin/conda clean -tipsy && \
+    /workdir/conda/bin/conda install -c conda-forge mamba
+
+RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml
+
 From ubuntu:22.10
-WORKDIR workdir
+WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
+COPY --from=build_image /workdir/conda /workdir/conda
+COPY --from=build_image /workdir/environment.yml /workdir/environment.yml
 
 RUN apt-get update && apt-get install -y \
     bzip2 \
@@ -40,21 +50,13 @@ RUN apt-get update && apt-get install -y \
     libgsl-dev \
     krb5-user \
     libpam-krb5 \
-    unzip \
-    vim \
-    wget && \
+    unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p ${WORKDIR}/conda && \
-    rm ~/miniconda.sh && \
-    ${WORKDIR}/conda/bin/conda clean -tipsy && \
-    ${WORKDIR}/conda/bin/conda install -c conda-forge mamba
-ENV PATH /${WORKDIR}/conda/bin:$PATH
+ENV PATH /workdir/conda/bin:$PATH
 
-RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
-    mamba env update -n base --file environment.yml && \
-    mamba clean --all && conda remove --yes mamba && conda clean --all
+RUN mamba env update -n base --file environment.yml && \
+    conda remove --yes mamba && conda clean --all
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
