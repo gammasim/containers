@@ -30,7 +30,7 @@ jobs:
       - name: corsikasimtelpackage
         run: |
           wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
-          mv download containers/dev/corsika7.7_simtelarray.tar.gz
+          mv download corsika7.7_simtelarray.tar.gz
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
