@@ -1,8 +1,6 @@
-# Introduction
+# Containers for gammasim-tools
 
 Docker files for [gammasim-tools](https://github.com/gammasim/gammasim-tools) development and applications.
-
-# Docker Containers
 
 [Docker](https://www.docker.com/community-edition#/download) or any compatible software are required to run these images.
 
