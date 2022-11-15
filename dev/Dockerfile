@@ -1,4 +1,4 @@
-From ubuntu:latest
+From ubuntu:22.10 as build_image
 WORKDIR workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -28,9 +28,24 @@ RUN cd sim_telarray && \
     ./build_all prod5 qgs2 gsl && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
-ENV SIMTELPATH="/workdir/sim_telarray/"
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linux-x86_64.sh -O ~/miniconda.sh && \
+From ubuntu:22.10
+WORKDIR workdir
+ENV DEBIAN_FRONTEND=noninteractive
+COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
+
+RUN apt-get update && apt-get install -y \
+    bzip2 \
+    gfortran \
+    libgsl-dev \
+    krb5-user \
+    libpam-krb5 \
+    unzip \
+    vim \
+    wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p ${WORKDIR}/conda && \
     rm ~/miniconda.sh && \
     ${WORKDIR}/conda/bin/conda clean -tipsy && \
@@ -38,14 +53,13 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linu
 ENV PATH /${WORKDIR}/conda/bin:$PATH
 
 RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml && \
-    mamba env update --file  environment.yml && \
-    conda clean -tipsy
+    mamba env update -n base --file environment.yml && \
+    mamba clean --all && conda remove --yes mamba && conda clean --all
 
+ENV SIMTELPATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \
     conda init bash
-RUN echo "conda activate gammasim-tools-dev" >> ~/.bashrc
-ENV PYTHONPATH=$PYTHONPATH:"/workdir/external/gammasim-tools"
 
 WORKDIR /workdir/external
