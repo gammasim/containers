@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y \
     unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV SIMTELPATH="/workdir/sim_telarray/"
+ENV SIMTEL_PATH="/workdir/sim_telarray/"
 
 SHELL ["/bin/bash", "-c"]
 WORKDIR /workdir/external

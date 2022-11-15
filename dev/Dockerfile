@@ -56,7 +56,7 @@ RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/enviro
     mamba env update -n base --file environment.yml && \
     mamba clean --all && conda remove --yes mamba && conda clean --all
 
-ENV SIMTELPATH="/workdir/sim_telarray/"
+ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \
