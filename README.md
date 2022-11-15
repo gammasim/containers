@@ -1,5 +1,7 @@
 # Containers for gammasim-tools
 
+[![DOI](https://zenodo.org/badge/285225623.svg)](https://zenodo.org/badge/latestdoi/285225623)
+
 Docker files for [gammasim-tools](https://github.com/gammasim/gammasim-tools) development and applications.
 
 [Docker](https://www.docker.com/community-edition#/download) or any compatible software are required to run these images.
