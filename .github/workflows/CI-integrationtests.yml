@@ -40,3 +40,12 @@ jobs:
         run: |
           cd ./dev
           docker build -t gammasim-tools-dev .
+
+      - name: checkout_gammasim-tools
+        run: |
+          mkdir external && cd external
+          git clone https://github.com/gammasim/gammasim-tools.git
+
+      - name: unittest
+        run: |
+          docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/"
