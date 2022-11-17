@@ -3,19 +3,19 @@ name: CI-integrationtests
 # Execute integration tests for docker container
 # with gammasim-tools
 env:
-  SIMTEL_PATH: ${{ github.workspace }}/
   DB_SERVER: ${{ secrets.DB_SERVER }}
   DB_API_USER: ${{ secrets.DB_API_USER }}
   DB_API_PW: ${{ secrets.DB_API_PW }}
   DB_API_PORT: ${{ secrets.DB_API_PORT }}
 
 on:
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches: ["main"]
+  release:
+    types: [published]
 
 jobs:
 
