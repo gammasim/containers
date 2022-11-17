@@ -50,4 +50,4 @@ jobs:
       - name: unittest
         run: |
           cd dev
-          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/"
+          docker run --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/"
