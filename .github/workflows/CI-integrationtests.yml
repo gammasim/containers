@@ -48,3 +48,4 @@ jobs:
           echo "export DB_SERVER=${{ secrets.DB_SERVER }}" >> set_DB_environ.sh
           cd ../..
           docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/"
+          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/integration_tests/"
