@@ -47,5 +47,9 @@ jobs:
           echo "export DB_API_PORT=${{ secrets.DB_API_PORT }}" >> set_DB_environ.sh
           echo "export DB_SERVER=${{ secrets.DB_SERVER }}" >> set_DB_environ.sh
           cd ../..
-          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/"
-          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/integration_tests/"
+          # run unit tests and require that all tests are pass
+          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/unit_tests/" | tee -a unit_tests.log
+          grep FAILED unit_tests.log && exit 1
+          # run integration tests and require that all tests are pass
+          docker run -t --rm -v "$(pwd)/external:/workdir/external" gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && pytest tests/integration_tests/" | tee -a integration_tests.log
+          grep FAILED integration_tests.log && exit 1
