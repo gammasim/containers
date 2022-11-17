@@ -1,0 +1,42 @@
+---
+name: CI-integrationtests
+# Execute integration tests for docker container
+# with gammasim-tools
+env:
+  SIMTEL_PATH: ${{ github.workspace }}/
+  DB_SERVER: ${{ secrets.DB_SERVER }}
+  DB_API_USER: ${{ secrets.DB_API_USER }}
+  DB_API_PW: ${{ secrets.DB_API_PW }}
+  DB_API_PORT: ${{ secrets.DB_API_PORT }}
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+  push:
+    branches:
+      - master
+
+jobs:
+
+  integrationtests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        #        python-version: [3.8, 3.9, 3.10.4]
+        python-version: [3.9]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: corsikasimtelpackage
+        run: |
+          wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
+          mv download ./dev/corsika7.7_simtelarray.tar.gz
+
+      - name: build
+        run: |
+          cd ./dev
+          docker build -t gammasim-tools-dev .
