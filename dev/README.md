@@ -80,6 +80,17 @@ pytest --no-cov
 - If everything works out, all the tests will pass.
 - To leave the docker just type: `exit`
 
-__Apple silicon users, notice you should add --platform=linux/amd64 to the run command above.__
-
 Any output will be written to the `$(pwd)/external` directory.
+
+__Apple silicon users, the following changes were necessary to get the docker to work and be more efficient:__ 
+ - The line --platform=linux/amd64 should be added to the `From` lines in the Dockerfile. I.e., it should be `From --platform=linux/amd64 ubuntu:22.10`. Notice there are two such lines in the Dockerfile.
+ - I also needed to modify `conda clean -tipsy` to `conda clean -tipy`, but I am not sure it has to do with the Apple silicon.
+ - Then to create a build which fits the ARM architecture, use the advanced builder functionality of docker with
+ ```
+ docker buildx create --name mybuilder
+ docker buildx use mybuilder
+ docker buildx build --platform linux/arm64/v8 -t gammasim-tools-dev . --load
+ ```
+ - Run the docker normally as explained above.
+
+These steps should in principle make the image run more efficiently on Apple silicon, but it is not really clear it does that as well.
