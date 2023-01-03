@@ -27,10 +27,10 @@ RUN cd sim_telarray && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /workdir/conda && \
     rm ~/miniconda.sh && \
-    /workdir/conda/bin/conda clean -tipsy && \
+    /workdir/conda/bin/conda clean -tipy && \
     /workdir/conda/bin/conda install -c conda-forge mamba
 
 RUN wget https://raw.githubusercontent.com/gammasim/gammasim-tools/master/environment.yml
