@@ -80,6 +80,4 @@ pytest --no-cov
 - If everything works out, all the tests will pass.
 - To leave the docker just type: `exit`
 
-__Apple silicon users, notice you should add --platform=linux/amd64 to the run command above.__
-
 Any output will be written to the `$(pwd)/external` directory.
