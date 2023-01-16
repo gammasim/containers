@@ -46,7 +46,7 @@ jobs:
           tags: |
             type=ref,event=pr,suffix=-gammasim-tools-dev
             type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-gammasim-tools-dev
-          images: ${{ env.REGISTRY }}/gammasim-tools-dev/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/gammasim/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
