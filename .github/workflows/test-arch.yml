@@ -55,6 +55,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm/v8
           push: ${{ github.event_name != 'release' }}
-          file: ./containers/dev/Dockerfile
+          file: ./containers/test-arch/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}-test-arch
