@@ -1,5 +1,5 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
-name: docker-gammasim-tools-dev
+name: docker-test-arch
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-gammasim-tools-dev:
+  build-test-arch:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,10 +27,11 @@ jobs:
         with:
           path: 'containers'
 
-      - name: corsikasimtelpackage
-        run: |
-          wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
-          mv download corsika7.7_simtelarray.tar.gz
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
@@ -44,15 +45,16 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           tags: |
-            type=ref,event=pr,suffix=-gammasim-tools-dev
-            type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-gammasim-tools-dev
-          images: ${{ env.REGISTRY }}/gammasim-tools-dev/${{ env.IMAGE_NAME }}
+            type=ref,event=pr,suffix=-test-arch
+            type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-test-arch
+          images: ${{ env.REGISTRY }}/gammasim/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          file: ./containers/dev/Dockerfile
+          platforms: linux/amd64,linux/arm64/v8
+          push: ${{ github.event_name != 'release' }}
+          file: ./containers/test-arch/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}-gammasim-tools-dev
+          labels: ${{ steps.meta.outputs.labels }}-test-arch
