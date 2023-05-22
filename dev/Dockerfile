@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y \
     bzip2 \
     gfortran \
     libgsl-dev \
+    bc \
     unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
