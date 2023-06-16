@@ -33,7 +33,14 @@ Building will take a while and the image is large (3.9 GB; mostly due to the >2 
 To run the container in bash 
 
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash  -c "$(cat ./entrypoint.sh) && bash"
+docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash
 ```
 
 In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/`.
+
+To run an application inside the container, e.g.:
+```
+docker run --rm -it -v "$(pwd)/external:/workdir/external" \
+    gammasim-tools-prod \
+    python /workdir/gammasim-tools/applications/print_array_elements.py
+```

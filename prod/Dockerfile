@@ -68,4 +68,7 @@ SHELL ["/bin/bash", "-c"]
 RUN source /root/.bashrc && \
     conda init bash
 
+RUN cd /workdir/gammasim-tools && \
+    pip install -e .
+
 WORKDIR /workdir/
