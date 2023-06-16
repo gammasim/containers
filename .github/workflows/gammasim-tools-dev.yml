@@ -24,6 +24,13 @@ jobs:
           wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
           mv download corsika7.7_simtelarray.tar.gz
 
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: corsika_simtelarray
+          path: corsika_simtelarray/corsika7.7_simtelarray.tar.gz
+          retention-days: 1
+
   build-gammasim-tools-container:
     needs: corsikasimtelpackage
     runs-on: ubuntu-latest
@@ -35,6 +42,14 @@ jobs:
         type: ['dev', 'prod']
 
     steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: corsika_simtelarray
+          path: corsika_simtelarray/corsika7.7_simtelarray.tar.gz
+        run: |
+          mv corsika_simtelarray/corsika7.7_simtelarray.tar.gz .
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
