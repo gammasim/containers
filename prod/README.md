@@ -1,6 +1,4 @@
-# Docker container for gammasim-tools production
-
-**this is work in progress and not working yet**
+# Container for gammasim-tools production
 
 ## Introduction
 
@@ -35,13 +33,7 @@ Building will take a while and the image is large (3.9 GB; mostly due to the >2 
 To run the container in bash 
 
 ```
-$  docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash
+docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash  -c "$(cat ./entrypoint.sh) && bash"
 ```
 
-In the container, find the gammasim-tools directory:
-```
-$ cd ./gammasim-tools/
-```
-
-Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md))
-
+In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/`.

@@ -68,4 +68,4 @@ SHELL ["/bin/bash", "-c"]
 RUN source /root/.bashrc && \
     conda init bash
 
-WORKDIR /workdir/external
+WORKDIR /workdir/
