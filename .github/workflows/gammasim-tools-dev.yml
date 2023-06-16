@@ -1,5 +1,5 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
-name: docker-gammasim-tools-dev
+name: docker-gammasim-tools
 
 on:
   push:
@@ -15,22 +15,30 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-gammasim-tools-dev:
+
+  corsikasimtelpackage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download corsikasimtelpackage
+        run: |
+          wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
+          mv download corsika7.7_simtelarray.tar.gz
+
+  build-gammasim-tools-container:
+    needs: corsikasimtelpackage
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        type: ['dev', 'prod']
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           path: 'containers'
-
-      - name: corsikasimtelpackage
-        run: |
-          wget --no-verbose https://syncandshare.desy.de/index.php/s/${{ secrets.CLOUD_SIMTEL }}/download
-          mv download corsika7.7_simtelarray.tar.gz
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -50,8 +58,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           tags: |
-            type=ref,event=pr,suffix=-gammasim-tools-dev
-            type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-gammasim-tools-dev
+            type=ref,event=pr,suffix=-${{ matrix.type }}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-gammasim-tools-${{ matrix.type }}
           images: ${{ env.REGISTRY }}/gammasim/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
@@ -60,6 +68,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64/v8
           push: ${{ github.event_name != 'release' }}
-          file: ./containers/dev/Dockerfile
+          file: ./containers/${{ matrix.type }}/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}-gammasim-tools-dev
+          labels: ${{ steps.meta.outputs.labels }}-gammasim-tools-${{ matrix.type }}
