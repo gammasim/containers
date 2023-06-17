@@ -39,7 +39,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        type: ['dev', 'prod']
+        type: ['dev', 'prod', 'simtelarray']
 
     steps:
       - name: Download Artifact
