@@ -72,15 +72,17 @@ jobs:
         with:
           tags: |
             type=ref,event=pr,suffix=-${{ matrix.type }}
-            type=semver,pattern={{major}}.{{minor}}.{{patch}},suffix=-gammasim-tools-${{ matrix.type }}
-          images: ${{ env.REGISTRY }}/gammasim/${{ env.IMAGE_NAME }}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+          images: ${{ env.REGISTRY }}/gammasim/gammasim-tools-${{ matrix.type }}
+          flavour: latest=auto
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64/v8
-          push: ${{ github.event_name != 'release' }}
+          push: true
+            # push: ${{ github.event_name != 'release' }}
           file: ./containers/${{ matrix.type }}/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}-${{ matrix.type }}
