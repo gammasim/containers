@@ -2,8 +2,7 @@ From ubuntu:22.10 as build_image
 WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install -y \
     bash \
     build-essential \
     bzip2 \
@@ -35,8 +34,7 @@ WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install -y \
     bzip2 \
     gfortran \
     libgsl-dev \

@@ -2,8 +2,7 @@ From ubuntu:22.10 as build_image
 WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install -y \
     bash \
     build-essential \
     bzip2 \
@@ -30,7 +29,7 @@ RUN cd sim_telarray && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
 
-RUN wget --quiet "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh" -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /workdir/conda && \
     rm ~/miniconda.sh && \
     /workdir/conda/bin/conda clean -tipy && \
@@ -42,8 +41,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
 COPY --from=build_image /workdir/conda /workdir/conda
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install -y \
     bzip2 \
     gfortran \
     libgsl-dev \
