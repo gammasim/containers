@@ -9,6 +9,8 @@ on:
     branches: ["main"]
   release:
     types: [published]
+  schedule:
+    - cron: '0 0 * * 0'  # Every Sunday at 00:00 UTC
 
 env:
   REGISTRY: ghcr.io
@@ -71,10 +73,11 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           tags: |
-            type=ref,event=pr,suffix=-${{ matrix.type }}
+            type=ref,event=pr
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=schedule,pattern={{date 'YYYYMMDD'}}
           images: ${{ env.REGISTRY }}/gammasim/gammasim-tools-${{ matrix.type }}
-          flavour: latest=auto
+          flavour: latest=true
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -82,7 +85,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64/v8
           push: true
-            # push: ${{ github.event_name != 'release' }}
           file: ./containers/${{ matrix.type }}/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}-${{ matrix.type }}
