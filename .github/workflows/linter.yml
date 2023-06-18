@@ -1,0 +1,24 @@
+name: Dockerfile Linter
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-dockerfiles:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Docker
+        uses: docker/setup-docker@v1
+
+      - name: Run Dockerfile Linter
+        run: |
+          docker run --rm -i hadolint/hadolint < $(find . -type f -name 'Dockerfile')
