@@ -11,14 +11,14 @@ Container includes installation of:
 - packages required by gammasim-tools (from environment.yml)
 - gammasim-tools (master)
 
-Images are automatically built by the [Github action workflow .github/workflows/build-image.dev](.github/workflows/build-image.dev) and can be downloaded from the [gammasim package website](https://github.com/orgs/gammasim/packages).
+Images are automatically built by the [Github action workflow ../.github/workflows/build-image.yml](../.github/workflows/build-image.yml) and can be downloaded from the [gammasim package website](https://github.com/orgs/gammasim/packages).
 
 ## Running
 
 To run the container in bash 
 
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash
+docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/gammasim-tools-prod:latest bash
 ```
 
 In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/`.
@@ -26,7 +26,7 @@ In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/
 To run an application inside the container, e.g.:
 ```
 docker run --rm -it -v "$(pwd)/external:/workdir/external" \
-    gammasim-tools-prod \
+    ghcr.io/gammasim/gammasim-tools-prod:latest \
     python /workdir/gammasim-tools/applications/print_array_elements.py
 ```
 
@@ -39,10 +39,10 @@ Download the tar package from the MPIK website (password applies) with
 $ ../tools/download_simulationsoftware.sh
 ```
 
-Build the container with:
+**Building:**
 
 ```
 $ docker build -t gammasim-tools-prod .
 ```
 
-Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff).
+Building will take a while and the image is large (2.3 GB).
