@@ -1,17 +1,34 @@
-# Docker container for gammasim-tools production
-
-**this is work in progress and not working yet**
+# Container for gammasim-tools production
 
 ## Introduction
 
 Provide a container for using gammasim-tools.
 
-Container contains installation of:
+Container includes installation of:
 
 - corsika and sim\_telarray
 - miniconda
 - packages required by gammasim-tools (from environment.yml)
 - gammasim-tools (master)
+
+Images are automatically built by the [Github action workflow .github/workflows/build-image.dev](.github/workflows/build-image.dev) and can be downloaded from the [gammasim package website](https://github.com/orgs/gammasim/packages).
+
+## Running
+
+To run the container in bash 
+
+```
+docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash
+```
+
+In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/`.
+
+To run an application inside the container, e.g.:
+```
+docker run --rm -it -v "$(pwd)/external:/workdir/external" \
+    gammasim-tools-prod \
+    python /workdir/gammasim-tools/applications/print_array_elements.py
+```
 
 ## Building
 
@@ -29,19 +46,3 @@ $ docker build -t gammasim-tools-prod .
 ```
 
 Building will take a while and the image is large (3.9 GB; mostly due to the >2 GB conda stuff).
-
-## Running
-
-To run the container in bash 
-
-```
-$  docker run --rm -it -v "$(pwd)/external:/workdir/external" gammasim-tools-prod bash
-```
-
-In the container, find the gammasim-tools directory:
-```
-$ cd ./gammasim-tools/
-```
-
-Expect any external software (e.g., gammasim-tools) in ./external directory (see [README.md](external/README.md))
-
