@@ -4,7 +4,7 @@
 
 Provide a container for testing and development of gammasim-tools. This container is not optimised for size, but for completeness of development tools.
 
-Container contains installation of:
+Container includes installation of:
 
 - corsika and sim\_telarray
 - miniconda
@@ -14,21 +14,21 @@ The container does not include gammasim-tools, which should be cloned in the ./e
 
 There are two options on how to use this container:
 
-1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev) (access restricted)
+1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/gammasim-tools-dev)
 2. Build a new container from the available Dockerfile (requires access to sim\_telarray package)
 
 ## Run a container using the prepared Docker image available from repository
 
-Packages are available from the [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers%2Fgammasim-tools-dev).
+Packages are available from the [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/gammasim-tools-dev)
 
 To download and run a prepared container in bash:
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/gammasim-tools-dev:v0.3.0-dev1 bash -c "$(cat ./entrypoint.sh) && bash"
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/gammasim-tools-dev:latest bash -c "$(cat ./entrypoint.sh) && bash"
 ```
 
 ```
-docker pull ghcr.io/gammasim/gammasim-tools-dev:pr-33-dev
+docker pull ghcr.io/gammasim/gammasim-tools-dev:latest
 ```
 
 This additionally executes the `entrypoint.sh` script (e.g., for pip install or set the database environment).
@@ -62,7 +62,7 @@ Download the tar package from the MPIK website (password applies) with
 - Now download (or use another version) of the corsika_simtelarray installation to this folder. To download from the website use:
 
 ```
-../tools/download_simulationsoftware.sh
+$ ../tools/download_simulationsoftware.sh
 ```
 
 **Building:**

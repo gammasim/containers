@@ -8,7 +8,7 @@ Provide a container including the following simulation software packages:
 
 There are two options on how to use this container:
 
-1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers) (access restricted)
+1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/gammasim-tools-simtelarray)
 2. Build a new container from the available Dockerfile (requires access to sim\_telarray package)
 
 Building:
@@ -18,17 +18,17 @@ docker build -t sim_telarray .
 
 Running:
 ```
-docker run --rm -it -v "$(pwd)/external:/external" sim_telarray bash
+docker run --rm -it -v "$(pwd)/external:/external" simtelarray bash
 ```
 
 ## Run a container using the prepared Docker image available from repository
 
-Packages are available from the [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/containers).
+Packages are available from the [gammasim-tools container repository](//github.com/gammasim/containers/pkgs/container/gammasim-tools-simtel).
 
 To download and run a prepared container in bash:
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers/simtelarray:latest bash
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/gammasim-tools-simtelarray:latest bash
 ```
 ## Build a new container
 
