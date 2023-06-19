@@ -77,7 +77,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
           images: ${{ env.REGISTRY }}/gammasim/gammasim-tools-${{ matrix.type }}
-          flavour: latest=true
+          flavor: latest=true
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
