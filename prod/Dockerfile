@@ -1,5 +1,5 @@
-From ubuntu:latest
-WORKDIR workdir
+From ubuntu:22.10 as build_image
+WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -28,27 +28,47 @@ RUN cd sim_telarray && \
     ./build_all prod5 qgs2 gsl && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
-ENV SIMTELPATH="/workdir/sim_telarray/"
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p ${WORKDIR}/conda && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /workdir/conda && \
     rm ~/miniconda.sh && \
-    ${WORKDIR}/conda/bin/conda clean -tipsy && \
-    ${WORKDIR}/conda/bin/conda install -c conda-forge mamba
-ENV PATH /${WORKDIR}/conda/bin:$PATH
+    /workdir/conda/bin/conda clean -tipy && \
+    /workdir/conda/bin/conda install -c conda-forge mamba
+
+From ubuntu:22.10
+WORKDIR /workdir
+ENV DEBIAN_FRONTEND=noninteractive
+COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
+COPY --from=build_image /workdir/conda /workdir/conda
+
+RUN apt-get update && apt-get install -y \
+    bzip2 \
+    gfortran \
+    libgsl-dev \
+    bc \
+    unzip \
+    wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV PATH /workdir/conda/bin:$PATH
 
 RUN wget --quiet https://github.com/gammasim/gammasim-tools/archive/refs/heads/master.zip && \
     unzip master.zip && mv gammasim-tools-master gammasim-tools && \
     rm -f master.zip && cd gammasim-tools && \
     mv environment.yml environment.yml.tmp && \
-    grep -v "name: gammasim-tools-dev" environment.yml.tmp > environment.yml && \
-    mamba env update -n base --file environment.yml && \
-    conda clean -tip
+    grep -v "name: gammasim-tools-dev" environment.yml.tmp > environment.yml 
 
+RUN conda install -c conda-forge mamba && \
+    mamba env update -n base --file gammasim-tools/environment.yml && \
+    mamba clean -tip
+
+ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
 
 RUN source /root/.bashrc && \
     conda init bash
-RUN cd /workdir/gammasim-tools && pip install -e .
 
-COPY config.yml /workdir/gammasim-tools
+RUN cd /workdir/gammasim-tools && \
+    pip install --no-cache-dir -e .
+
+WORKDIR /workdir/

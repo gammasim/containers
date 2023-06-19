@@ -27,6 +27,10 @@ To download and run a prepared container in bash:
 $ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/containers:0.4.0-gammasim-tools-dev bash -c "$(cat ./entrypoint.sh) && bash"
 ```
 
+```
+docker pull ghcr.io/gammasim/gammasim-tools-dev:pr-33-dev
+```
+
 This additionally executes the `entrypoint.sh` script (e.g., for pip install or set the database environment).
 
 ## Build a new container

@@ -1,5 +1,5 @@
 From ubuntu:22.10 as build_image
-WORKDIR workdir
+WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -30,7 +30,7 @@ RUN cd sim_telarray && \
     cd ..
 
 From ubuntu:22.10
-WORKDIR workdir
+WORKDIR /workdir
 ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
 
@@ -46,4 +46,4 @@ RUN apt-get update && apt-get install -y \
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 
 SHELL ["/bin/bash", "-c"]
-WORKDIR /workdir/external
+WORKDIR /workdir/
