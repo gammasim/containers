@@ -8,7 +8,7 @@ Provide a container including the following simulation software packages:
 
 There are two options on how to use this container:
 
-1. Download from [gammasim-tools container repository](https://github.com/gammasim/containers/pkgs/container/gammasim-tools-simtelarray)
+1. Download from [simtools container repository](https://github.com/gammasim/containers/pkgs/container/simtools-simtelarray)
 2. Build a new container from the available Dockerfile (requires access to sim\_telarray package)
 
 Building:
@@ -23,12 +23,12 @@ docker run --rm -it -v "$(pwd)/external:/external" simtelarray bash
 
 ## Run a container using the prepared Docker image available from repository
 
-Packages are available from the [gammasim-tools container repository](//github.com/gammasim/containers/pkgs/container/gammasim-tools-simtel).
+Packages are available from the [simtools container repository](//github.com/gammasim/containers/pkgs/container/simtools-simtel).
 
 To download and run a prepared container in bash:
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/gammasim-tools-simtelarray:latest bash
+$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/simtools-simtelarray:latest bash
 ```
 ## Build a new container
 
@@ -42,11 +42,11 @@ mkdir gammasim
 cd gammasim
 git clone git@github.com:gammasim/containers.git
 ```
-- Clone gammasim-tools into the external directory (this is where the source files of gammasim-tools will be available for development):
+- Clone simtools into the external directory (this is where the source files of simtools will be available for development):
 ```
 cd containers/simtelarray/external
-git clone git@github.com:gammasim/gammasim-tools.git
-cd gammasim-tools
+git clone git@github.com:gammasim/simtools.git
+cd simtools
 ```
 Go to the following path (gammasim/containers/simtelarray/) and assure that there is a *Dockerfile* there:
 ```

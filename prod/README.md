@@ -1,15 +1,15 @@
-# Container for gammasim-tools production
+# Container for simtools production
 
 ## Introduction
 
-Provide a container for using gammasim-tools.
+Provide a container for using simtools.
 
 Container includes installation of:
 
 - corsika and sim\_telarray
 - miniconda
-- packages required by gammasim-tools (from environment.yml)
-- gammasim-tools (master)
+- packages required by simtools (from environment.yml)
+- simtools (master)
 
 Images are automatically built by the [Github action workflow ../.github/workflows/build-image.yml](../.github/workflows/build-image.yml) and can be downloaded from the [gammasim package website](https://github.com/orgs/gammasim/packages).
 
@@ -18,16 +18,16 @@ Images are automatically built by the [Github action workflow ../.github/workflo
 To run the container in bash 
 
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/gammasim-tools-prod:latest bash
+docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/simtools-prod:latest bash
 ```
 
-In the container, find the gammasim-tools directory in `/workdir/gammasim-tools/`.
+In the container, find the simtools directory in `/workdir/simtools/`.
 
 To run an application inside the container, e.g.:
 ```
 docker run --rm -it -v "$(pwd)/external:/workdir/external" \
-    ghcr.io/gammasim/gammasim-tools-prod:latest \
-    python /workdir/gammasim-tools/applications/print_array_elements.py
+    ghcr.io/gammasim/simtools-prod:latest \
+    python /workdir/simtools/applications/print_array_elements.py
 ```
 
 ## Building
@@ -42,7 +42,7 @@ $ ../tools/download_simulationsoftware.sh
 **Building:**
 
 ```
-$ docker build -t gammasim-tools-prod .
+$ docker build -t simtools-prod .
 ```
 
 Building will take a while and the image is large (2.3 GB).

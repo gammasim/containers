@@ -3,8 +3,8 @@
 
 cff-version: 1.2.0
 title: >-
-  Containers for Gammasim-tools - docker files for
-  gammasim-tools development and applications.
+  Containers for simtools - docker files for
+  simtools development and applications.
 message: Please cite this software using these metadata.
 type: software
 authors:
