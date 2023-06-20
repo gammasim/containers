@@ -1,7 +1,7 @@
 ---
 name: CI-integrationtests
 # Execute integration tests for docker container
-# with gammasim-tools
+# with simtools
 
 on:
   push:
