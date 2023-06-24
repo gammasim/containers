@@ -52,14 +52,14 @@ RUN apt-get update && apt-get install -y \
 
 ENV PATH /workdir/conda/bin:$PATH
 
-RUN wget --quiet https://github.com/gammasim/gammasim-tools/archive/refs/heads/master.zip && \
-    unzip master.zip && mv gammasim-tools-master gammasim-tools && \
-    rm -f master.zip && cd gammasim-tools && \
+RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zip && \
+    unzip main.zip && mv simtools-main simtools && \
+    rm -f main.zip && cd simtools && \
     mv environment.yml environment.yml.tmp && \
-    grep -v "name: gammasim-tools-dev" environment.yml.tmp > environment.yml 
+    grep -v "name: simtools-dev" environment.yml.tmp > environment.yml 
 
 RUN conda install -c conda-forge mamba && \
-    mamba env update -n base --file gammasim-tools/environment.yml && \
+    mamba env update -n base --file simtools/environment.yml && \
     mamba clean -tip
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
@@ -68,7 +68,7 @@ SHELL ["/bin/bash", "-c"]
 RUN source /root/.bashrc && \
     conda init bash
 
-RUN cd /workdir/gammasim-tools && \
+RUN cd /workdir/simtools && \
     pip install --no-cache-dir -e .
 
 WORKDIR /workdir/
