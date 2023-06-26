@@ -1,5 +1,5 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
-name: docker-gammasim-tools
+name: docker-simtools
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
           path: corsika7.7_simtelarray.tar.gz
           retention-days: 1
 
-  build-gammasim-tools-container:
+  build-simtools-container:
     needs: corsikasimtelpackage
     runs-on: ubuntu-latest
     permissions:
@@ -76,7 +76,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
-          images: ${{ env.REGISTRY }}/gammasim/gammasim-tools-${{ matrix.type }}
+          images: ${{ env.REGISTRY }}/gammasim/simtools-${{ matrix.type }}
           flavor: latest=true
 
       - name: Build and push Docker image
@@ -84,7 +84,7 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64/v8
-          push: true
+          push: ${{ github.event_name == 'pull_request' || github.event_name == 'release' }}
           file: ./containers/${{ matrix.type }}/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}-${{ matrix.type }}

@@ -8,7 +8,7 @@ Docker files for [simtools](https://github.com/gammasim/simtools) development an
 
 Types of containers available:
 - simtools development: [dev](./dev) provides a container with CORSIKA, sim\_telarray, and simtools conda environment installed. Pull latest release with: `docker pull ghcr.io/gammasim/simtools-dev:latest`
-- simtools users: [prod](./prod) provides a container with all software installed (CORSIKA, sim\_telarray, simtools conda environment, gammasim_tools). Pull latest release with: `docker pull ghcr.io/gammasim/simtools-prod:latest`
+- simtools users: [prod](./prod) provides a container with all software installed (CORSIKA, sim\_telarray, simtools conda environment, simtools). Pull latest release with: `docker pull ghcr.io/gammasim/simtools-prod:latest`
 - sim\_telarray: [simtelarray](./simtelarray) provides a container with the CORSIKA and sim\_telarray installed. Pull latest release with: `docker pull ghcr.io/gammasim/simtools-simtelarray:latest`
 
 The CORSIKA / sim\_telarray packages can be downloaded from MPIK (authentication required).
