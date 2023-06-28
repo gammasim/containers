@@ -33,6 +33,8 @@ docker pull ghcr.io/gammasim/simtools-dev:latest
 
 This additionally executes the `entrypoint.sh` script (e.g., for pip install or set the database environment).
 
+Remember you need to `docker login` to the GitHub package repository with a personal token in order to download an image (follow [these instructions](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)).
+
 ## Build a new container
 
 Description of build a new container using the [Dockerfile](Dockerfile) available in this directory.
