@@ -24,7 +24,7 @@ Packages are available from the [simtools container repository](https://github.c
 To download and run a prepared container in bash:
 
 ```
-$ docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/simtools-dev:latest bash -c "$(cat ./entrypoint.sh) && bash"
+docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/simtools-dev:latest bash -c "$(cat ./entrypoint.sh) && bash"
 ```
 
 ```
@@ -32,6 +32,8 @@ docker pull ghcr.io/gammasim/simtools-dev:latest
 ```
 
 This additionally executes the `entrypoint.sh` script (e.g., for pip install or set the database environment).
+
+Remember you need to `docker login` to the GitHub package repository with a personal token in order to download an image (follow [these instructions](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)).
 
 ## Build a new container
 
