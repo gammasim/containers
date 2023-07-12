@@ -52,13 +52,8 @@ RUN apt-get update && apt-get install -y \
 ENV PATH /workdir/conda/bin:$PATH
 
 RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zip && \
-    unzip main.zip && mv simtools-main simtools && \
-    rm -f main.zip && cd simtools && \
-    mv environment.yml environment.yml.tmp && \
-    grep -v "name: simtools-dev" environment.yml.tmp > environment.yml 
-
-RUN conda env update -n base --file simtools/environment.yml && \
-    conda clean -tip
+    unzip main.zip && \
+    mv simtools-main simtools
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
@@ -67,6 +62,6 @@ RUN source /root/.bashrc && \
     conda init bash
 
 RUN cd /workdir/simtools && \
-    pip install --no-cache-dir -e .
+    pip install --no-cache-dir .
 
 WORKDIR /workdir/
