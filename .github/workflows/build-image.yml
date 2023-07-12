@@ -71,13 +71,13 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v4.6
         with:
           tags: |
             type=ref,event=pr
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
-            type=ref,event=workflow_dispatch, pattern={{date 'YYYYMMDD-HHmmss'}}
+            type=sha,event=workflow_dispatch, pattern={{date 'YYYYMMDD-HHmmss'}}
           images: ${{ env.REGISTRY }}/gammasim/simtools-${{ matrix.type }}
           flavor: latest=true
 
