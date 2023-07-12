@@ -75,9 +75,9 @@ jobs:
         with:
           tags: |
             type=ref,event=pr
-            type=ref,event=push
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=raw,pattern={{date 'YYYYMMDD'}}
           images: ${{ env.REGISTRY }}/gammasim/simtools-${{ matrix.type }}
           flavor: latest=true
 
