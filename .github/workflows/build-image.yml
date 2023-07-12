@@ -77,6 +77,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=workflow_dispatch, pattern={{date 'YYYYMMDD-HHmmss'}}
           images: ${{ env.REGISTRY }}/gammasim/simtools-${{ matrix.type }}
           flavor: latest=true
 
