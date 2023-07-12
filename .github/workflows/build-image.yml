@@ -2,6 +2,7 @@
 name: docker-simtools
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*'
