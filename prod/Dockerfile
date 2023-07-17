@@ -52,7 +52,7 @@ RUN apt-get update && apt-get install -y \
 ENV PATH /workdir/conda/bin:$PATH
 
 RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zip && \
-    unzip main.zip && \
+    unzip main.zip && rm -f main.zip && \
     mv simtools-main simtools
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
