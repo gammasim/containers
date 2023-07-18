@@ -32,8 +32,7 @@ RUN cd sim_telarray && \
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /workdir/conda && \
     rm ~/miniconda.sh && \
-    /workdir/conda/bin/conda clean -tipy && \
-    /workdir/conda/bin/conda install -c conda-forge mamba
+    /workdir/conda/bin/conda clean -tipy
 
 From ubuntu:22.10
 WORKDIR /workdir
@@ -58,9 +57,8 @@ RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zi
     mv environment.yml environment.yml.tmp && \
     grep -v "name: simtools-dev" environment.yml.tmp > environment.yml 
 
-RUN conda install -c conda-forge mamba && \
-    mamba env update -n base --file simtools/environment.yml && \
-    mamba clean -tip
+RUN conda env update -n base --file simtools/environment.yml && \
+    conda clean -tip
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
