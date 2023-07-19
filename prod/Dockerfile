@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir sim_telarray
 COPY corsika7.7_simtelarray.tar.gz sim_telarray
 RUN cd sim_telarray && \
-    tar -xvzf corsika7.7_simtelarray.tar.gz && \
+    tar -xvf corsika7.7_simtelarray.tar.gz && \
     ./build_all prod5 qgs2 gsl && \
     find . -name "*.tar.gz" -exec rm -f {} \; && \
     cd ..
