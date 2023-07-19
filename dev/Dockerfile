@@ -32,7 +32,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(u
     rm ~/miniconda.sh && \
     /workdir/conda/bin/conda clean -tipy
 
-RUN wget --quiet https://raw.githubusercontent.com/gammasim/simtools/master/environment.yml
+RUN wget --quiet https://raw.githubusercontent.com/gammasim/simtools/main/environment.yml
 
 From ubuntu:22.10
 WORKDIR /workdir
