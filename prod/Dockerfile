@@ -35,13 +35,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=build_image /workdir/sim_telarray/ /workdir/sim_telarray/
 
 RUN apt-get update && apt-get install -y \
+    bc \
     bzip2 \
     gfortran \
     libgsl-dev \
-    bc \
+    python3-pip \
     unzip \
-    wget \
-    python3-pip && \
+    wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet https://bootstrap.pypa.io/get-pip.py && \
