@@ -46,7 +46,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget --quiet https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
-    ln -s /usr/bin/python3 /usr/bin/python
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    rm -f get-pip.py
 
 RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zip && \
     unzip main.zip && rm -f main.zip && \
