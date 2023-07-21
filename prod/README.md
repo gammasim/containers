@@ -30,7 +30,7 @@ docker run --rm -it -v "$(pwd)/external:/workdir/external" \
     python /workdir/simtools/applications/print_array_elements.py
 ```
 
-## Building
+## Building (for developers)
 
 Building expects that a tar ball of corsika/sim\_telarray (corsika7.7\_simtelarray.tar.gz) is available in the building directory.
 Download the tar package from the MPIK website (password applies) with
@@ -45,4 +45,15 @@ $ ../tools/download_simulationsoftware.sh
 $ docker build -t simtools-prod .
 ```
 
-Building will take a while and the image is large (2.3 GB).
+Building will take a while and the image is large (~1.3 GB).
+
+**Running**
+
+To run the container that was just built,
+
+```
+docker run --rm -it simtools-prod bash
+```
+
+Notice that in this case we did not include the `external` directory since we did not set it up before. It can be done similarly to the `dev` container if needed though.
+
