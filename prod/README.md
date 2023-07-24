@@ -53,4 +53,4 @@ $ ../tools/download_simulationsoftware.sh
 $ docker build -t simtools-prod .
 ```
 
-Building will take a while and the image is large (~1.4 GB).
+Building will take a while and the image is large (~1.4 GB). For using images build on your own, replace in all examples `ghcr.io/gammasim/simtools-prod:latest` by the local image name `simtools-prod`.
