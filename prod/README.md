@@ -26,7 +26,7 @@ In case file exchange with the local file system is required, use the docker syn
 docker run --rm -it -v "$(pwd):/workdir/external" ghcr.io/gammasim/simtools-prod:latest bash
 ```
 
-The following examples runs an application inside the container and write the output into a directory of the local files system, 
+The following example runs an application inside the container and write the output into a directory of the local files system, 
 ```
 docker run --rm -it -v "$(pwd):/workdir/external" \
     ghcr.io/gammasim/simtools-prod:latest \
