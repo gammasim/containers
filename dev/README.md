@@ -76,11 +76,10 @@ docker build -t simtools-dev .
 
 - Once it is ready (it might take some minutes) run the docker in the same folder (gammasim/containers/dev/):
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" simtools-dev bash
+docker run --rm -it -v "$(pwd)/external:/workdir/external" simtools-dev bash -c "$(cat ./entrypoint.sh) && bash"
 ```
-- Now you are inside the docker. To test the setup, go the simtools folder and run a pytest:
+- Now you are inside the docker. To test the setup, run pytest after entering the docker image:
 ```
-cd simtools
 pytest --no-cov
 ```
 - If everything works out, all the tests will pass.
