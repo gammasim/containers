@@ -9,28 +9,36 @@ Container includes installation of:
 - corsika and sim\_telarray
 - miniconda
 - packages required by simtools (from environment.yml)
-- simtools (master)
+- simtools (main branch)
 
-Images are automatically built by the [Github action workflow ../.github/workflows/build-image.yml](../.github/workflows/build-image.yml) and can be downloaded from the [gammasim package website](https://github.com/orgs/gammasim/packages).
+Images are automatically built by the [Github action workflow ../.github/workflows/build-image.yml](../.github/workflows/build-image.yml) and can be downloaded from the [gammasim package website](https://github.com/gammasim/containers/pkgs/container/simtools-prod).
 
 ## Running
 
 To run the container in bash 
-
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" ghcr.io/gammasim/simtools-prod:latest bash
+docker run ghcr.io/gammasim/simtools-prod:latest bash
+```
+In the container, simtools applications are installed and can be called directly (e.g., `simtools-prod simtools-print-array-elements -h`).
+
+In case file exchange with the local file system is required, use the docker syntax to mount a directory. Example:
+```
+docker run --rm -it -v "$(pwd):/workdir/external" ghcr.io/gammasim/simtools-prod:latest bash
 ```
 
-In the container, find the simtools directory in `/workdir/simtools/`.
-
-To run an application inside the container, e.g.:
+The following example runs an application inside the container and write the output into a directory of the local files system, 
 ```
-docker run --rm -it -v "$(pwd)/external:/workdir/external" \
+docker run --rm -it -v "$(pwd):/workdir/external" \
     ghcr.io/gammasim/simtools-prod:latest \
-    python /workdir/simtools/applications/print_array_elements.py
+    simtools-print-array-elements \
+    --array_element_list ./simtools/tests/resources/telescope_positions-North-utm.ecsv \
+    --export corsika --use_corsika_telescope_height \
+    --output_path /workdir/external/
 ```
 
-## Building
+Output files can be found `./simtools-output/`.
+
+## Building (for developers)
 
 Building expects that a tar ball of corsika/sim\_telarray (corsika7.7\_simtelarray.tar.gz) is available in the building directory.
 Download the tar package from the MPIK website (password applies) with
@@ -45,4 +53,4 @@ $ ../tools/download_simulationsoftware.sh
 $ docker build -t simtools-prod .
 ```
 
-Building will take a while and the image is large (2.3 GB).
+Building will take a while and the image is large (~1.4 GB). For using images build on your own, replace in all examples `ghcr.io/gammasim/simtools-prod:latest` by the local image name `simtools-prod`.
