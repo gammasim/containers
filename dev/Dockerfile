@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y \
     gfortran \
     libgsl-dev \
     python3-pip \
+    zstd \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
