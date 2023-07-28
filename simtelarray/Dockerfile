@@ -36,8 +36,8 @@ RUN apt-get update && apt-get install -y \
     bzip2 \
     gfortran \
     libgsl-dev \
-    unzip && \
     zstd \
+    unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
