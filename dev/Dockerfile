@@ -43,11 +43,12 @@ RUN wget --quiet https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
     ln -s /usr/bin/python3 /usr/bin/python
 
-RUN wget --quiet https://raw.githubusercontent.com/gammasim/simtools/main/setup.py && \
-    wget --quiet https://raw.githubusercontent.com/gammasim/simtools/main/pyproject.toml
+RUN wget --quiet https://raw.githubusercontent.com/gammasim/simtools/main/pyproject.toml && \
+    pip install toml-to-requirements && \
+    toml-to-req --toml-file pyproject.toml --include-optional
 
 RUN cd /workdir/ && \
-    pip install '.[tests,dev,doc]'
+    pip install -r requirements.txt
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
