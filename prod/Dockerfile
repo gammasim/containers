@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
     bc \
     bzip2 \
     gfortran \
+    git \
     libgsl-dev \
     python3-pip \
     unzip \
@@ -49,9 +50,7 @@ RUN wget --quiet https://bootstrap.pypa.io/get-pip.py && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     rm -f get-pip.py
 
-RUN wget --quiet https://github.com/gammasim/simtools/archive/refs/heads/main.zip && \
-    unzip main.zip && rm -f main.zip && \
-    mv simtools-main simtools
+RUN git clone https://github.com/gammasim/simtools.git
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
