@@ -34,14 +34,17 @@ RUN apt-get update && apt-get install -y \
     bc \
     bzip2 \
     gfortran \
+    git \
     libgsl-dev \
     python3-pip \
+    unzip \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
-    ln -s /usr/bin/python3 /usr/bin/python
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    rm -f get-pip.py
 
 RUN wget --quiet https://raw.githubusercontent.com/gammasim/simtools/main/pyproject.toml && \
     pip install toml-to-requirements && \
@@ -52,6 +55,5 @@ RUN cd /workdir/ && \
 
 ENV SIMTEL_PATH="/workdir/sim_telarray/"
 SHELL ["/bin/bash", "-c"]
-
 
 WORKDIR /workdir/external
