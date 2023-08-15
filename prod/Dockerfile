@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y \
     g++ \
     git \
     libgsl-dev \
-    krb5-user \
-    libpam-krb5 \
     make \
     unzip \
     vim \
@@ -42,6 +40,7 @@ RUN apt-get update && apt-get install -y \
     libgsl-dev \
     python3-pip \
     unzip \
+    zstd \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

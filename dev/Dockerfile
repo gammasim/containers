@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
     libgsl-dev \
     python3-pip \
     unzip \
+    zstd \
     wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
