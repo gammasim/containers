@@ -2,6 +2,13 @@
 
 [![DOI](https://zenodo.org/badge/285225623.svg)](https://zenodo.org/badge/latestdoi/285225623)
 
+
+| :exclamation:  This repository has been replaced by [simtools/docker](https://github.com/gammasim/simtools/tree/main/docker)  |
+|-----------------------------------------|
+
+
+
+
 Docker files for [simtools](https://github.com/gammasim/simtools) development and applications.
 
 [Docker](https://www.docker.com/community-edition#/download) or any compatible software are required to run these images.
